@@ -1,0 +1,32 @@
+<div class="load" *ngIf="load">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="content-form">
+    <div>
+        <h1>Login</h1>
+    </div>
+    <div>
+        <form [formGroup]="formUser">
+
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username">
+                    <mat-error *ngIf="formUser.invalid">{{getErrorMessage(formUser.controls['username'])}}</mat-error>
+
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password">
+                    <mat-error *ngIf="formUser.invalid">{{getErrorMessage(formUser.controls['password'])}}</mat-error>
+                </mat-form-field>
+                <div class="btn">
+                    <button (click)="onSubmit()" [disabled]="load" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

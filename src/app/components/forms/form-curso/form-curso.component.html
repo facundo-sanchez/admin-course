@@ -1,0 +1,42 @@
+
+<div class="content-form">
+    <div>
+        <h1>Form Course</h1>
+    </div>
+    
+    <div *ngIf="teachers && teachers.length>0">
+        <form [formGroup]="formCourse" (ngSubmit)="submit()">
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="course">
+                    <mat-error *ngIf="formCourse.invalid">{{getErrorMessage(formCourse.controls['course'])}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field  appearance="fill">
+                    <mat-label>Teacher</mat-label>
+
+                    <mat-select  formControlName="teacher">
+                        <mat-option *ngFor="let t of teachers" value="{{t.id}}">{{t.name}} {{t.surname}}</mat-option>
+                    </mat-select>
+<!-- 
+                    <mat-select  formControlName="teacher" *ngIf="!isArray">
+                        <mat-option value="{{teachers.id}}">{{teachers.name}} {{teachers.surname}}</mat-option>
+                    </mat-select> -->
+                    <mat-error *ngIf="formCourse.invalid">{{getErrorMessage(formCourse.controls['teacher'])}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="text-center">
+                <button mat-raised-button color="primary" type="submit">Submit</button>
+            </div>
+          
+            <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+        </form>
+    </div>
+    <!-- <mat-progress-bar mode="indeterminate" *ngIf="!teachers"></mat-progress-bar> -->
+
+    <div class="load" *ngIf="!load">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>
